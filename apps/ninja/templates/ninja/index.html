@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link href="css/style.css" rel="stylesheet"> -->
+        <script>
+            
+        </script>
+        <style>
+            #farm, #cave, #house,#casino{
+                display: inline-block;
+                margin: 50px 50px;
+                border: 2px solid black;   
+            }
+
+            .text{
+                display: block;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div>
+            <label for="">Monkey's Gold</label><span>--->   {{request.session.gold_count}}</span>
+            <div>
+                <div id='farm'>
+                    <h3>Farm</h3>
+                    <h4>(10-20 golds)</h4>
+                    <form action="/process_money" method="post">{%csrf_token%}
+                        <input type="hidden" name="building" value="farm" />
+                        <input type="submit" value="Find Gold!"/>
+                    </form>
+                </div>
+                <div id='cave'>
+                    <h3>Cave</h3>
+                    <h4>(5-10 golds)</h4>
+                    <form action="/process_money" method="post">{%csrf_token%}
+                        <input type="hidden" name="building" value="cave" />
+                        <input type="submit" value="Find Gold!"/>
+                    </form>
+                </div>
+                <div id='house'>
+                    <h3>House</h3>
+                    <h4>(2-5 golds)</h4>
+                    <form action="/process_money" method="post">{%csrf_token%}
+                        <input type="hidden" name="building" value="house" />
+                        <input type="submit" value="Find Gold!"/>
+                    </form>
+                </div>
+                <div id='casino'>
+                    <h3>Casino</h3>
+                    <h4>(0-50 golds)</h4>
+                    <form action="/process_money" method="post">{%csrf_token%}
+                        <input type="hidden" name="building" value="casino" />
+                        <input type="submit" value="Find Gold!"/>
+                    </form>
+                </div>
+            </div>
+            <label class='text' for="">Activities</label>
+            <textarea class='text' name="" id="" cols="70" rows="10">
+                 {%if request.session.score == 'win' %}
+                You earned {{request.session.gold}} golds from {{request.session.loc}}!!!)
+                {%endif%} 
+                {%if request.session.score == 'lose' %}
+                You lost {{request.session.gold}} golds from {{request.session.loc}} -----
+                {%endif%} 
+
+            </textarea>
+            <a href="/reset"><button>Restart Game</button></a>
+        </div>
+    </body>
+</html>
